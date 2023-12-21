@@ -3,6 +3,14 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">ToDos</h1>
+    <form method="post" class="form-group">
+        <label for="titleText">Enter a title</label>
+        <input type="text" id="titleText" name="titleText" />
+
+        <label for="descriptionText">Enter a description</label>
+        <input type="text" id="descriptionText" name="descriptionText" />
+        
+        <button type="submit">Add ToDo</button>        
+    </form>
 </div>
