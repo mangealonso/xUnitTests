@@ -28,3 +28,4 @@ C:\Users\llfoo\source\repos\ToDoApp\ToDoApp.Tests\obj\Debug\net8.0\refint\ToDoAp
 C:\Users\llfoo\source\repos\ToDoApp\ToDoApp.Tests\obj\Debug\net8.0\ToDoApp.Tests.pdb
 C:\Users\llfoo\source\repos\ToDoApp\ToDoApp.Tests\obj\Debug\net8.0\ToDoApp.Tests.genruntimeconfig.cache
 C:\Users\llfoo\source\repos\ToDoApp\ToDoApp.Tests\obj\Debug\net8.0\ref\ToDoApp.Tests.dll
+C:\Users\llfoo\source\repos\ToDoApp\ToDoApp.Tests\obj\Debug\net8.0\ToDoApp.Tests.sourcelink.json
