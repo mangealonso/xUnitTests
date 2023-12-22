@@ -1,4 +1,4 @@
-namespace ToDoApp.Tests
+namespace ToDoApp
 {
 	public class Program
 	{

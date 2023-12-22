@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\ToDoApp.Tests.csproj",
-      "projectName": "ToDoApp.Tests",
-      "projectPath": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\ToDoApp.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\ToDoApp.csproj",
+      "projectName": "ToDoApp",
+      "projectPath": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\ToDoApp.csproj",
       "packagesPath": "C:\\Users\\llfoo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\obj\\",
       "projectStyle": "PackageReference",

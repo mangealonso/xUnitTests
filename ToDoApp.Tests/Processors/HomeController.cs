@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using ToDoApp.Tests.Models;
+using ToDoApp.Models;
 
 namespace ToDoApp.Tests.Controllers
 {
