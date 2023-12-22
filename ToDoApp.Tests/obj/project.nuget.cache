@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JMvlJwfSI8Nk6J18el/qED7vtv+gUKOJJ39xehKJBczQ18AbIbdb1vVeKBnYC4jlOW/xEuU/Xgzb+MUG70QXjw==",
+  "dgSpecHash": "fUbvdCc+hWO5bwBlab6irm8oZh+eWNE1ZqYVaTY0JXxKsOLEVjGsfxYn0mkNkQjSo2rA8Upq893mLJh7AbHtcg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\ToDoApp.Tests.csproj",
+  "projectFilePath": "C:\\Users\\llfoo\\source\\repos\\ToDoApp\\ToDoApp.Tests\\ToDoApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
