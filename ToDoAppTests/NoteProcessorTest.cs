@@ -19,27 +19,7 @@ namespace ToDoAppTests
         }
 
         [Fact]
-        public void Should_Return_Note_With_Same_Id()
-        {
-            // ARRANGE
-            var note = new Note
-            {
-                Id = 15,
-                Title = "Test note",
-                Description = "Test description",
-                IsDone = false
-            };
-
-            // ACT
-            NoteResult result = _processor.Save(note);
-
-            // ASSERT
-            Assert.NotNull(result);
-            Assert.Equal(note.Id, result.Id);
-        }
-
-        [Fact]
-        public void Should_Return_Note_With_Details()
+        public void Should_Return_Note_To_Save_With_Details()
         {
             // ARRANGE
             var note = new Note
@@ -89,7 +69,7 @@ namespace ToDoAppTests
                     Id = 2,
                     Title = "Test note 2",
                     Description = "Test description 2",
-                    IsDone = true
+                    IsDone = false
                 }
             };
 
@@ -108,7 +88,7 @@ namespace ToDoAppTests
                     Id = 2,
                     Title = "Test note 2",
                     Description = "Test description 2",
-                    IsDone = true
+                    IsDone = false
                 }
             };
 
@@ -139,6 +119,88 @@ namespace ToDoAppTests
             // ASSERT
             Assert.NotNull(results);
             Assert.Empty(results);
+        }
+
+        [Fact]
+        public void Should_Delete_Note_Successfully()
+        {
+            // ARRANGE
+            var notes = new List<Note>
+            {
+                new Note
+                {
+                    Id = 1,
+                    Title = "Test note 1",
+                    Description = "Test description 1",
+                    IsDone = false
+                },
+
+                new Note
+                {
+                    Id = 2,
+                    Title = "Test note 2",
+                    Description = "Test description 2",
+                    IsDone = false
+                }
+            };
+
+            int noteIdToDelete = 1;
+
+            // ACT
+            bool result = _processor.Delete(notes, noteIdToDelete);
+
+            // ASSERT
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void Should_Return_Updated_List_After_Deleting_A_Note()
+        {
+            // ARRANGE
+            var notes = new List<Note>
+            {
+                new Note
+                {
+                    Id = 1,
+                    Title = "Test note 1",
+                    Description = "Test description 1",
+                    IsDone = false
+                },
+
+                new Note
+                {
+                    Id = 2,
+                    Title = "Test note 2",
+                    Description = "Test description 2",
+                    IsDone = false
+                }
+            };
+
+            var expectedNotes = new List<NoteResult>
+            {
+                new NoteResult
+                {
+                    Id = 2,
+                    Title = "Test note 2",
+                    Description = "Test description 2",
+                    IsDone = false
+                }
+            };
+
+            // ACT
+            _processor.Delete(notes, 1);
+            var results = _processor.SaveUpdatedList(notes);
+
+            // ASSERT
+            for (int i = 0; i < expectedNotes.Count; i++)
+            {
+                Assert.NotNull(results[i]);
+
+                Assert.Equal(expectedNotes[i].Id, results[i].Id);
+                Assert.Equal(expectedNotes[i].Title, results[i].Title);
+                Assert.Equal(expectedNotes[i].Description, results[i].Description);
+                Assert.Equal(expectedNotes[i].IsDone, results[i].IsDone);
+            }
         }
     }
 }
