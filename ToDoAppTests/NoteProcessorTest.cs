@@ -69,5 +69,76 @@ namespace ToDoAppTests
 
             Assert.Equal("note", exception.ParamName);
         }
+
+        [Fact]
+        public void Should_Return_List_Of_Notes_With_Details()
+        {
+            // ARRANGE
+            var notes = new List<Note>
+            {
+                new Note 
+                {
+                    Id = 1,
+                    Title = "Test note 1",
+                    Description = "Test description 1",
+                    IsDone = false
+                },
+
+                new Note
+                {
+                    Id = 2,
+                    Title = "Test note 2",
+                    Description = "Test description 2",
+                    IsDone = true
+                }
+            };
+
+            var expectedNotes = new List<NoteResult>
+            {
+                new NoteResult
+                {
+                    Id = 1,
+                    Title = "Test note 1",
+                    Description = "Test description 1",
+                    IsDone = false
+                },
+
+                new NoteResult
+                {
+                    Id = 2,
+                    Title = "Test note 2",
+                    Description = "Test description 2",
+                    IsDone = true
+                }
+            };
+
+            // ACT
+            var results = _processor.SaveList(notes);
+
+            // ASSERT
+            for (int i = 0; i < expectedNotes.Count; i++)
+            {
+                Assert.NotNull(results[i]);
+
+                Assert.Equal(expectedNotes[i].Id, results[i].Id);
+                Assert.Equal(expectedNotes[i].Title, results[i].Title);
+                Assert.Equal(expectedNotes[i].Description, results[i].Description);
+                Assert.Equal(expectedNotes[i].IsDone, results[i].IsDone);
+            }
+        }
+
+        [Fact]
+        public void Should_Return_Empty_List_When_Input_Is_Empty()
+        {
+            // ARRANGE
+            var emptyNotes = new List<Note>();
+
+            // ACT
+            var results = _processor.SaveList(emptyNotes);
+
+            // ASSERT
+            Assert.NotNull(results);
+            Assert.Empty(results);
+        }
     }
 }

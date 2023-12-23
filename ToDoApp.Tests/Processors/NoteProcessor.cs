@@ -23,5 +23,22 @@ namespace ToDoApp
                 IsDone = note.IsDone,
             };
         }
+
+        public List<NoteResult> SaveList(List<Note> notes)
+        {
+            if (notes == null)
+            {
+                throw new ArgumentNullException(nameof(notes));
+            }
+
+            var noteResult = new List<NoteResult>();
+
+            foreach (var note in notes)
+            {
+                noteResult.Add(Save(note));
+            }
+
+            return noteResult;
+        }
     }
 }
