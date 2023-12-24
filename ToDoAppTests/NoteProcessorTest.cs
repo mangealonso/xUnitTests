@@ -22,32 +22,27 @@ namespace ToDoAppTests
         public void Should_Return_Note_To_Save_With_Details()
         {
             // ARRANGE
-            var note = new Note
-            {
-                Id = 1,
-                Title = "Test note",
-                Description = "Test description",
-                IsDone = false
-            };
+            string title = "Test note";
+            string description = "Test description";
 
             // ACT
-            NoteResult result = _processor.Save(note);
+            NoteResult result = _processor.Save(title, description);
 
             // ASSERT
             Assert.NotNull(result);
 
-            Assert.Equal(note.Id, result.Id);
-            Assert.Equal(note.Title, result.Title);
-            Assert.Equal(note.Description, result.Description);
-            Assert.Equal(note.IsDone, result.IsDone);
+            Assert.Equal(default(int), result.Id);
+            Assert.Equal(title, result.Title);
+            Assert.Equal(description, result.Description);
+            Assert.False(result.IsDone);
         }        
 
         [Fact]
         public void Should_Throw_Exception_For_Null_Result()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => _processor.Save(null!));
+            var exception = Assert.Throws<ArgumentNullException>(() => _processor.Save(null, "Test description"));
 
-            Assert.Equal("note", exception.ParamName);
+            Assert.Equal("title", exception.ParamName);
         }
 
         [Fact]
@@ -58,18 +53,14 @@ namespace ToDoAppTests
             {
                 new Note 
                 {
-                    Id = 1,
                     Title = "Test note 1",
-                    Description = "Test description 1",
-                    IsDone = false
+                    Description = "Test description 1"
                 },
 
                 new Note
                 {
-                    Id = 2,
                     Title = "Test note 2",
-                    Description = "Test description 2",
-                    IsDone = false
+                    Description = "Test description 2"
                 }
             };
 
@@ -77,7 +68,7 @@ namespace ToDoAppTests
             {
                 new NoteResult
                 {
-                    Id = 1,
+                    Id = 0,
                     Title = "Test note 1",
                     Description = "Test description 1",
                     IsDone = false
@@ -85,7 +76,7 @@ namespace ToDoAppTests
 
                 new NoteResult
                 {
-                    Id = 2,
+                    Id = 1,
                     Title = "Test note 2",
                     Description = "Test description 2",
                     IsDone = false
@@ -103,7 +94,7 @@ namespace ToDoAppTests
                 Assert.Equal(expectedNotes[i].Id, results[i].Id);
                 Assert.Equal(expectedNotes[i].Title, results[i].Title);
                 Assert.Equal(expectedNotes[i].Description, results[i].Description);
-                Assert.Equal(expectedNotes[i].IsDone, results[i].IsDone);
+                Assert.False(results[i].IsDone);
             }
         }
 

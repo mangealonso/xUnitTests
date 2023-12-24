@@ -8,8 +8,9 @@ namespace ToDoApp
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<NoteProcessor>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
@@ -28,7 +29,7 @@ namespace ToDoApp
 
 			app.MapControllerRoute(
 				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
+				pattern: "{controller=ToDo}/{action=Index}/{id?}");
 
 			app.Run();
 		}

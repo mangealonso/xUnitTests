@@ -7,21 +7,34 @@ namespace ToDoApp
         public NoteProcessor()
         {
         }
-
-        public NoteResult Save(Note note)
+        private int nextId = 0;
+        private List<NoteResult> allToDos = new List<NoteResult>();
+        public NoteResult Save(string title, string description)
         {
-            if(note is null)
+            if (title is null)
             {
-                throw new ArgumentNullException(nameof(note));
+                throw new ArgumentNullException(nameof(title));
             }
 
-            return new NoteResult
+            var note = new Note
+            {
+                Id = nextId++,
+                Title = title,
+                Description = description,
+                IsDone = false,
+            };
+
+            var result = new NoteResult
             {
                 Id = note.Id,
                 Title = note.Title,
                 Description = note.Description,
                 IsDone = note.IsDone,
             };
+
+            allToDos.Add(result);
+
+            return result;
         }
 
         public List<NoteResult> SaveList(List<Note> notesList)
@@ -35,7 +48,7 @@ namespace ToDoApp
 
             foreach (var note in notesList)
             {
-                noteResult.Add(Save(note));
+                noteResult.Add(Save(note.Title, note.Description));
             }
 
             return noteResult;
@@ -101,6 +114,11 @@ namespace ToDoApp
             {
                 return false;
             }
+        }
+
+        public List<NoteResult> GetAllToDos()
+        {
+            return allToDos;
         }
     }
 }
