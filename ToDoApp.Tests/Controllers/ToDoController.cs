@@ -27,7 +27,15 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public IActionResult Save(string titleText, string descriptionText)
         {
-            _processor.Save(titleText, descriptionText);
+            _processor.SaveNote(titleText, descriptionText);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _processor.DeleteNote(id);
 
             return RedirectToAction("Index");
         }

@@ -14,13 +14,23 @@
         <button type="submit">Add ToDo</button>        
     </form>
 
-    <ul id="todoList">
-        @if (Model != null)
-        {
-            @foreach (var note in Model)
+    <ul id="todoList">        
+            @if (Model != null)
             {
-                <li>@note.Title - @note.Description</li>
-            }
-        }        
+                @foreach (var note in Model)
+                {
+                    <li>
+                        <div style="display: inline-block;">
+                            @note.Title - @note.Description
+                        </div>
+                        <div style="display: inline-block;">
+                            <form asp-controller="ToDo" asp-action="Delete" method="post">
+                                <input type="hidden" name="id" value="@note.Id" />
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            }        
     </ul>
 </div>
