@@ -4,7 +4,7 @@
 
 <div class="text-center">
     <h1 class="display-4">ToDos</h1>
-    <form method="post" class="form-group">
+    <form asp-controller="ToDo" asp-action="Save" method="post" id="todoForm" class="form-group">
         <label for="titleText">Enter a title</label>
         <input type="text" id="titleText" name="titleText" />
 
@@ -13,4 +13,14 @@
         
         <button type="submit">Add ToDo</button>        
     </form>
+
+    <ul id="todoList">
+        @if (Model != null)
+        {
+            @foreach (var note in Model)
+            {
+                <li>@note.Title - @note.Description</li>
+            }
+        }        
+    </ul>
 </div>
