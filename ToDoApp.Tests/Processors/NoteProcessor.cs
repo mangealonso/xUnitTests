@@ -13,9 +13,14 @@ namespace ToDoApp
 
         public NoteResult SaveNote(string title, string description)
         {
-            if (title is null)
+            if (title == null)
             {
                 throw new ArgumentNullException(nameof(title));
+            }
+
+            if (description == null)
+            {
+                throw new ArgumentNullException(nameof(description));
             }
 
             var note = new Note
@@ -79,49 +84,6 @@ namespace ToDoApp
         public List<NoteResult> GetAllToDos()
         {
             return allToDos;
-        }
-
-
-        //public List<NoteResult> RemoveNoteFromList(List<Note> notesList)
-        //{
-        //    if (notesList == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(notesList));
-        //    }
-
-        //    var noteResult = new List<NoteResult>();
-
-        //    foreach (var note in notesList)
-        //    {
-        //        var existingNote = notesList.FirstOrDefault(x => x.Id == note.Id);
-
-        //        if (existingNote != null)
-        //        {
-        //            existingNote.Title = note.Title;
-        //            existingNote.Description = note.Description;
-        //            existingNote.IsDone = note.IsDone;
-
-        //            noteResult.Add(new NoteResult
-        //            {
-        //                Id = existingNote.Id,
-        //                Title = existingNote.Title,
-        //                Description = existingNote.Description,
-        //                IsDone = existingNote.IsDone,
-        //            });
-        //        }
-        //        else
-        //        {
-        //            noteResult.Add(new NoteResult
-        //            {
-        //                Id = note.Id,
-        //                Title = note.Title,
-        //                Description = note.Description,
-        //                IsDone = note.IsDone,
-        //            });
-        //        }
-        //    }
-
-        //    return noteResult;
-        //}  
+        } 
     }
 }
