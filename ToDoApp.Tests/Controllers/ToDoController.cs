@@ -27,6 +27,24 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public IActionResult Save(string titleText, string descriptionText)
         {
+            if (string.IsNullOrWhiteSpace(titleText))
+            {
+                ModelState.AddModelError("Title", "Title is required.");
+            }
+
+            if (string.IsNullOrWhiteSpace(descriptionText))
+            {
+                ModelState.AddModelError("Description", "Description is required.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var allToDos = _processor.GetAllToDos();
+                ViewData["titleText"] = titleText;
+                ViewData["descriptionText"] = descriptionText;
+                return View("Index", allToDos);
+            }
+
             _processor.SaveNote(titleText, descriptionText);
 
             return RedirectToAction("Index");

@@ -22,6 +22,12 @@ namespace ToDoAppTests
         public void Should_Return_Note_To_Save_With_Details()
         {
             // ARRANGE
+
+            var note = new Note 
+            {
+                Title = "Test note",
+                Description = "Test description",
+            };
             string title = "Test note";
             string description = "Test description";
 
@@ -35,7 +41,7 @@ namespace ToDoAppTests
             Assert.Equal(title, result.Title);
             Assert.Equal(description, result.Description);
             Assert.False(result.IsDone);
-        }        
+        }
 
         [Fact]
         public void Should_Throw_Exception_For_Null_Result()
@@ -129,55 +135,5 @@ namespace ToDoAppTests
             // ASSERT
             Assert.True(result);
         }
-
-        //[Fact]
-        //public void Should_Return_Updated_List_After_Deleting_A_Note()
-        //{
-        //    // ARRANGE
-        //    var notes = new List<Note>
-        //    {
-        //        new Note
-        //        {
-        //            Id = 1,
-        //            Title = "Test note 1",
-        //            Description = "Test description 1",
-        //            IsDone = false
-        //        },
-
-        //        new Note
-        //        {
-        //            Id = 2,
-        //            Title = "Test note 2",
-        //            Description = "Test description 2",
-        //            IsDone = false
-        //        }
-        //    };
-
-        //    var expectedNotes = new List<NoteResult>
-        //    {
-        //        new NoteResult
-        //        {
-        //            Id = 2,
-        //            Title = "Test note 2",
-        //            Description = "Test description 2",
-        //            IsDone = false
-        //        }
-        //    };
-
-        //    // ACT
-        //    _processor.DeleteNote(notes, 1);
-        //    var results = _processor.RemoveNoteFromList(notes);
-
-        //    // ASSERT
-        //    for (int i = 0; i < expectedNotes.Count; i++)
-        //    {
-        //        Assert.NotNull(results[i]);
-
-        //        Assert.Equal(expectedNotes[i].Id, results[i].Id);
-        //        Assert.Equal(expectedNotes[i].Title, results[i].Title);
-        //        Assert.Equal(expectedNotes[i].Description, results[i].Description);
-        //        Assert.Equal(expectedNotes[i].IsDone, results[i].IsDone);
-        //    }
-        //}
     }
 }
