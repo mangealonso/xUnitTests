@@ -18,23 +18,55 @@
         <button type="submit">Add ToDo</button>        
     </form>
 
-    <ul id="todoList">        
-            @if (Model != null)
+    <ul id="todoList">
+        @if (Model != null)
+        {
+            @foreach (var note in Model)
             {
-                @foreach (var note in Model)
-                {
-                    <li>
-                        <div style="display: inline-block;">
+                <li>
+                    <div style="display: inline-block;">
+                        <span class="@(note.IsDone ? "todo-text completed" : "todo-text")">
                             @note.Title - @note.Description
-                        </div>
-                        <div style="display: inline-block;">
-                            <form asp-controller="ToDo" asp-action="Delete" method="post">
+                        </span>
+                    </div>
+                    <div style="display: inline-block;">
+                        @if (!note.IsDone)
+                        {
+                            <form asp-controller="ToDo" asp-action="ToggleStatus" method="post">
                                 <input type="hidden" name="id" value="@note.Id" />
-                                <button type="submit">Delete</button>
+                                <button type="submit" class="complete-button">
+                                    Completed
+                                </button>
                             </form>
-                        </div>
-                    </li>
-                }
-            }        
+                        }
+                        else
+                        {
+                            <form asp-controller="ToDo" asp-action="ToggleStatus" method="post">
+                                <input type="hidden" name="id" value="@note.Id" />
+                                <button type="submit" class="complete-button completed">
+                                    Not completed
+                                </button>
+                            </form>
+                            <form asp-controller="ToDo" asp-action="DeleteCompleted" method="post">
+                                <input type="hidden" name="id" value="@note.Id" />
+                                <button type="submit">
+                                    Delete
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </li>
+            }
+            @if (((IEnumerable<NoteResult>)Model).Any(note => note.IsDone))
+            {
+                <li>
+                    <form asp-controller="ToDo" asp-action="DeleteAllCompleted" method="post">
+                        <button type="submit">
+                            Delete All Completed ToDos
+                        </button>
+                    </form>
+                </li>
+            }
+        }        
     </ul>
 </div>

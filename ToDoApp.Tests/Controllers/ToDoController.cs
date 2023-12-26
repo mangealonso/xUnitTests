@@ -45,15 +45,33 @@ namespace ToDoApp.Controllers
                 return View("Index", allToDos);
             }
 
-            _processor.SaveNote(titleText, descriptionText);
+            _processor.SaveToDo(titleText, descriptionText);
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult ToggleStatus(int id)
         {
-            _processor.DeleteNote(id);
+            _processor.ToggleToDoStatus(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCompleted(int id)
+        {
+            _processor.DeleteCompletedToDo(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteAllCompleted()
+        {
+            var allCompletedToDos = _processor.GetAllCompletedToDos();
+
+            _processor.DeleteAllCompletedToDos();
 
             return RedirectToAction("Index");
         }
