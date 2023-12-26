@@ -11,7 +11,7 @@ namespace ToDoApp
         private int nextId = 0;
         private List<NoteResult> allToDos = new List<NoteResult>();
 
-        public NoteResult SaveNote(string title, string description)
+        public NoteResult SaveToDo(string title, string description)
         {
             if (title == null)
             {
@@ -44,7 +44,7 @@ namespace ToDoApp
             return result;
         }
 
-        public List<NoteResult> AddNoteToList(List<Note> notesList)
+        public List<NoteResult> AddToDoToList(List<Note> notesList)
         {
             if (notesList == null)
             {
@@ -55,13 +55,39 @@ namespace ToDoApp
 
             foreach (var note in notesList)
             {
-                noteResult.Add(SaveNote(note.Title, note.Description));
+                noteResult.Add(SaveToDo(note.Title, note.Description));
             }
 
             return noteResult;
         }
 
-        public bool DeleteNote(int idToDelete)
+        public void ToggleToDoStatus(int idToChange)
+        {
+            if (allToDos == null)
+            {
+                throw new ArgumentNullException(nameof(allToDos));
+            }
+
+            var noteToChange = allToDos.FirstOrDefault(x => x.Id == idToChange);
+
+            if (noteToChange != null)
+            {
+                if (noteToChange.IsDone == false)
+                {
+                    noteToChange.IsDone = true;
+                }
+                else
+                {
+                    noteToChange.IsDone = false;
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        public bool DeleteCompletedToDo(int idToDelete)
         {
             if (allToDos == null)
             {
@@ -79,11 +105,34 @@ namespace ToDoApp
             {
                 return false;
             }
-        }     
+        }
+
+        public void DeleteAllCompletedToDos()
+        {
+            var allCompletedToDos = GetAllCompletedToDos();
+
+            if (allCompletedToDos == null)
+            {
+                throw new ArgumentNullException(nameof(allCompletedToDos));
+            }
+            else
+            {
+                foreach (var toDo in allCompletedToDos)
+                {
+                    allToDos.Remove(toDo);
+                }
+            }
+        }
 
         public List<NoteResult> GetAllToDos()
         {
             return allToDos;
-        } 
+        }
+                       
+
+        public List<NoteResult> GetAllCompletedToDos()
+        {
+            return allToDos.Where(x => x.IsDone == true).ToList();
+        }
     }
 }

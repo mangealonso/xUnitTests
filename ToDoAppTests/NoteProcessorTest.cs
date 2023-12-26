@@ -32,7 +32,7 @@ namespace ToDoAppTests
             string description = "Test description";
 
             // ACT
-            NoteResult result = _processor.SaveNote(title, description);
+            NoteResult result = _processor.SaveToDo(title, description);
 
             // ASSERT
             Assert.NotNull(result);
@@ -46,7 +46,7 @@ namespace ToDoAppTests
         [Fact]
         public void Should_Throw_Exception_For_Null_Result()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => _processor.SaveNote(null, "Test description"));
+            var exception = Assert.Throws<ArgumentNullException>(() => _processor.SaveToDo(null, "Test description"));
 
             Assert.Equal("title", exception.ParamName);
         }
@@ -90,7 +90,7 @@ namespace ToDoAppTests
             };
 
             // ACT
-            var results = _processor.AddNoteToList(notes);
+            var results = _processor.AddToDoToList(notes);
 
             // ASSERT
             for (int i = 0; i < expectedNotes.Count; i++)
@@ -111,7 +111,7 @@ namespace ToDoAppTests
             var emptyNotes = new List<Note>();
 
             // ACT
-            var results = _processor.AddNoteToList(emptyNotes);
+            var results = _processor.AddToDoToList(emptyNotes);
 
             // ASSERT
             Assert.NotNull(results);
@@ -124,13 +124,13 @@ namespace ToDoAppTests
             // ARRANGE
             var processor = new NoteProcessor();
 
-            processor.SaveNote("Test note 1", "Test description 1");
-            processor.SaveNote("Test note 2", "Test description 2");
+            processor.SaveToDo("Test note 1", "Test description 1");
+            processor.SaveToDo("Test note 2", "Test description 2");
 
             int noteIdToDelete = 1;
 
             // ACT
-            bool result = processor.DeleteNote(noteIdToDelete);
+            bool result = processor.DeleteCompletedToDo(noteIdToDelete);
 
             // ASSERT
             Assert.True(result);

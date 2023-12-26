@@ -8,7 +8,11 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -22,32 +26,60 @@ body {
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .form-group {
-    width: 300px;
-    margin: 0 auto;
-    text-align: left;
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .form-group label,
 .form-group input {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 ul {
-    list-style: none;
-    display:block;
-    padding: 0;
-    margin-top: 20px;
+  list-style: none;
+  display: block;
+  padding: 0;
+  margin-top: 20px;
 }
 
 li {
-    display: block;
-    margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+  display: block;
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+}
+
+.complete-button[disabled] {
+  display: none;
+}
+
+.todo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.todo-content {
+  flex: 1;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.delete-all {
+  text-align: center;
 }
