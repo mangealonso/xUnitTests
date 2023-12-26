@@ -66,27 +66,6 @@ namespace ToDoAppTests
                 }
             };
 
-            // Creating a list of the expected result for the two ToDos after they have been created
-            var expectedNotes = new List<NoteResult>
-            {
-                new NoteResult
-                {
-                    Id = 0,
-                    Title = "Test note 1",
-                    Description = "Test description 1",
-                    IsDone = false
-                },
-
-                new NoteResult
-                {
-                    Id = 1,
-                    Title = "Test note 2",
-                    Description = "Test description 2",
-                    IsDone = false
-                }
-            };
-
-            // ACT - Creating a list and adding the two ToDos that has been created to that list
             var results = new List<NoteResult>();
 
             foreach (var note in notes)
@@ -95,15 +74,21 @@ namespace ToDoAppTests
                 results.Add(result);
             }
 
-            // ASSERT - Checking so that values of the two ToDos that has been created are the same as the expected values
-            for (int i = 0; i < expectedNotes.Count; i++)
+            // ACT - Calling the method for getting all ToDos
+            var retrievedNotes = _processor.GetAllToDos();
+
+            // ASSERT - Checking so that the retrieved notes match the expected note
+            Assert.NotNull(retrievedNotes);
+            Assert.Equal(results.Count, retrievedNotes.Count);
+
+            for (int i = 0; i < retrievedNotes.Count; i++)
             {
                 Assert.NotNull(results[i]);
 
-                Assert.Equal(expectedNotes[i].Id, results[i].Id);
-                Assert.Equal(expectedNotes[i].Title, results[i].Title);
-                Assert.Equal(expectedNotes[i].Description, results[i].Description);
-                Assert.False(results[i].IsDone);
+                Assert.Equal(results[i].Id, retrievedNotes[i].Id);
+                Assert.Equal(results[i].Title, retrievedNotes[i].Title);
+                Assert.Equal(results[i].Description, retrievedNotes[i].Description);
+                Assert.Equal(results[i].IsDone, retrievedNotes[i].IsDone);
             }
         }
 
