@@ -14,6 +14,7 @@ namespace ToDoApp.Controllers
         {
             var allToDos = _processor.GetAllToDos();
 
+            // Displaying the ToDos, if there are any. Otherwise just return the default View
             if (allToDos.Count > 0)
             {
                 return View(allToDos);
@@ -50,6 +51,7 @@ namespace ToDoApp.Controllers
             return RedirectToAction("Index");
         }
 
+        // Since it´s an application with only one page, Index, this method is HttpPost instead of HttpPut
         [HttpPost]
         public IActionResult ToggleStatus(int id)
         {
@@ -58,6 +60,7 @@ namespace ToDoApp.Controllers
             return RedirectToAction("Index");
         }
 
+        // Since it´s an application with only one page, Index, this method is HttpPost instead of HttpDelete
         [HttpPost]
         public IActionResult DeleteCompleted(int id)
         {
@@ -66,11 +69,10 @@ namespace ToDoApp.Controllers
             return RedirectToAction("Index");
         }
 
+        // Since it´s an application with only one page, Index, this method is HttpPost instead of HttpDelete
         [HttpPost]
         public IActionResult DeleteAllCompleted()
         {
-            var allCompletedToDos = _processor.GetAllCompletedToDos();
-
             _processor.DeleteAllCompletedToDos();
 
             return RedirectToAction("Index");
