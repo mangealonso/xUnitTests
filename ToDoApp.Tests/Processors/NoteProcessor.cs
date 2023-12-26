@@ -8,7 +8,10 @@ namespace ToDoApp
         {
         }
 
+        // To keep track of the id´s of the ToDos
         private int nextId = 0;
+
+        // A list for all the current ToDos
         private List<NoteResult> allToDos = new List<NoteResult>();
 
         public NoteResult SaveToDo(string title, string description)
@@ -23,6 +26,7 @@ namespace ToDoApp
                 throw new ArgumentNullException(nameof(description));
             }
 
+            // Setting up the creation of the ToDo, incrementing the Id and setting IsDone to false
             var note = new Note
             {
                 Id = nextId++,
@@ -31,6 +35,7 @@ namespace ToDoApp
                 IsDone = false,
             };
 
+            // Creating the ToDo
             var result = new NoteResult
             {
                 Id = note.Id,
@@ -39,28 +44,13 @@ namespace ToDoApp
                 IsDone = note.IsDone,
             };
 
+            // Adding the ToDo to the list
             allToDos.Add(result);
 
             return result;
         }
 
-        public List<NoteResult> AddToDoToList(List<Note> notesList)
-        {
-            if (notesList == null)
-            {
-                throw new ArgumentNullException(nameof(notesList));
-            }
-
-            var noteResult = new List<NoteResult>();
-
-            foreach (var note in notesList)
-            {
-                noteResult.Add(SaveToDo(note.Title, note.Description));
-            }
-
-            return noteResult;
-        }
-
+        // Method to toggle the status of the ToDo from Incomplete to Complete and vice versa
         public void ToggleToDoStatus(int idToChange)
         {
             if (allToDos == null)

@@ -4,38 +4,40 @@
 
 <div class="text-center">
     <h1 class="display-4">ToDos</h1>
-    <form asp-controller="ToDo" asp-action="Save" method="post" id="todoForm" class="form-group">
-        <label>
-            <input type="text" id="titleText" name="titleText" placeholder="Enter a title" 
-                value="@(!string.IsNullOrEmpty(ViewData["titleText"]?.ToString()) ? ViewData["titleText"] : string.Empty)" />
-            <span class="text-danger">@Html.ValidationMessage("Title")</span>
-        </label>
-        <label>
-            <input type="text" id="descriptionText" name="descriptionText" placeholder="Enter a description" 
-                value="@(!string.IsNullOrEmpty(ViewData["descriptionText"]?.ToString()) ? ViewData["descriptionText"] : string.Empty)" />
-            <span class="text-danger">@Html.ValidationMessage("Description")</span>
-        </label>
-        <button type="submit">Add ToDo</button>        
-    </form>
+    <div class="form-center">
+        <form asp-controller="ToDo" asp-action="Save" method="post" id="todoForm" class="form-group">
+            <label>
+                <input type="text" id="titleText" name="titleText" placeholder="Enter a title" 
+                    value="@(!string.IsNullOrEmpty(ViewData["titleText"]?.ToString()) ? ViewData["titleText"] : string.Empty)" />
+                <span class="text-danger">@Html.ValidationMessage("Title")</span>
+            </label>
+            <label>
+                <input type="text" id="descriptionText" name="descriptionText" placeholder="Enter a description" 
+                    value="@(!string.IsNullOrEmpty(ViewData["descriptionText"]?.ToString()) ? ViewData["descriptionText"] : string.Empty)" />
+                <span class="text-danger">@Html.ValidationMessage("Description")</span>
+            </label>
+            <button type="submit">Add ToDo</button>        
+        </form>
+    </div>
 
     <ul id="todoList">
         @if (Model != null)
         {
             @foreach (var note in Model)
             {
-                <li>
-                    <div style="display: inline-block;">
+                <li class="todo-container">
+                    <div class="todo-content">
                         <span class="@(note.IsDone ? "todo-text completed" : "todo-text")">
                             @note.Title - @note.Description
                         </span>
                     </div>
-                    <div style="display: inline-block;">
+                    <div class="todo-actions">
                         @if (!note.IsDone)
                         {
                             <form asp-controller="ToDo" asp-action="ToggleStatus" method="post">
                                 <input type="hidden" name="id" value="@note.Id" />
                                 <button type="submit" class="complete-button">
-                                    Completed
+                                    Mark as Completed
                                 </button>
                             </form>
                         }
@@ -44,7 +46,7 @@
                             <form asp-controller="ToDo" asp-action="ToggleStatus" method="post">
                                 <input type="hidden" name="id" value="@note.Id" />
                                 <button type="submit" class="complete-button completed">
-                                    Not completed
+                                    Mark as Not Completed
                                 </button>
                             </form>
                             <form asp-controller="ToDo" asp-action="DeleteCompleted" method="post">
