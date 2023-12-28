@@ -73,7 +73,7 @@ namespace ToDoApp
             }
             else
             {
-
+                Console.WriteLine("ToDo was not found.");
             }
         }
 
